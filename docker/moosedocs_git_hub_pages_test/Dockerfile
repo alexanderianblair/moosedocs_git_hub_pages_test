@@ -21,4 +21,4 @@ RUN git checkout $build_git_sha
 # Build MooseDocsGitHubPagesTest
 WORKDIR /$WORKDIR/moosedocs_git_hub_pages_test
 RUN make -j$compile_cores
-RUN make -j$compile_cores doc
+RUN doxygen doc/content/doxygen/Doxyfile
