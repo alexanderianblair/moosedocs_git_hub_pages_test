@@ -1,6 +1,6 @@
 # Build and test MooseDocsGitHubPagesTest image
 # Get base image
-FROM alexanderianblair/platypus-deps
+FROM alexanderianblair/platypus-deps:main
 
 # By default four cores are used to compile
 ARG compile_cores=4
