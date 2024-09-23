@@ -1,0 +1,36 @@
+---
+name: BuildDocs
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker-build-test-ubuntu:
+    runs-on: ubuntu-latest
+    name: BuildDocsUbuntu
+    env:
+      PRCOMMITSHA: ${{ github.event.pull_request.head.sha }}
+      PRREPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+    steps:
+      - name: Get Docker image
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: idaholab/moose        
+      # First check out the repository to get the docker file
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Print the context for this GitHub workflow
+      - name: PrintGithubContext
+        run: echo "${PRCOMMITSHA:-$GITHUB_SHA}" "${PRREPOSITORY:-$GITHUB_REPOSITORY}"
+      # Now build in a container with all deps
+      - name: DockerBuildTest
+        run: |
+             docker build -t ci-moosedocstest \
+                          --build-arg build_git_sha="${PRCOMMITSHA:-$GITHUB_SHA}" \
+                          --build-arg build_git_repo="${PRREPOSITORY:-$GITHUB_REPOSITORY}" \
+                          docker/moosedocs_git_hub_pages_test
