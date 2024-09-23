@@ -1,6 +1,6 @@
 # Build and test MooseDocsGitHubPagesTest image
 # Get base image
-FROM idaholab/moose
+FROM alexanderianblair/platypus-deps
 
 # By default four cores are used to compile
 ARG compile_cores=4
