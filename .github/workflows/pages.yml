@@ -58,7 +58,7 @@ jobs:
                           docker/moosedocs_git_hub_pages_test
       - name: DockerRunContainer
         run: |
-             docker cp -r ci-docs-ubuntu:/opt/moosedocs_git_hub_pages_test ${{ runner.temp }}/doctest         
+             docker cp ci-docs-ubuntu:/opt/moosedocs_git_hub_pages_test ${{ runner.temp }}/doctest         
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
