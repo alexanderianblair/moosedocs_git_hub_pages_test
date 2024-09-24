@@ -6,8 +6,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install 
     graphviz
 
 RUN pip install --no-cache-dir livereload && \
-    pip install --no-cache-dir pybtex
-
+    pip install --no-cache-dir pybtex && \
+    pip install --no-cache-dir pylatexenc
+    
 # By default four cores are used to compile
 ARG compile_cores=4
 
