@@ -25,3 +25,5 @@ RUN git checkout $build_git_sha
 WORKDIR /$WORKDIR/moosedocs_git_hub_pages_test
 RUN make -j$compile_cores
 RUN doxygen doc/content/doxygen/Doxyfile
+WORKDIR /$WORKDIR/doc
+RUN ./moosedocs.py build
