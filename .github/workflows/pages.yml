@@ -58,8 +58,8 @@ jobs:
                           docker/moosedocs_git_hub_pages_test
       - name: DockerRunContainer
         run: |
-             docker run ci-docs-ubuntu \
-                          --mount type=bind,source=./_site/build/,target=/opt/_site/build                          
+             docker run --mount type=bind,source=./_site/build/,target=/opt/_site/build ci-docs-ubuntu 
+                                                    
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
