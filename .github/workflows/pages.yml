@@ -53,6 +53,7 @@ jobs:
       - name: DockerBuildDocs
         run: |
              docker build -t ci-docs-ubuntu \
+                          --mount type=bind,source=./_site/build/,target=/opt/_site/build/
                           --build-arg build_git_sha="${PRCOMMITSHA:-$GITHUB_SHA}" \
                           --build-arg build_git_repo="${PRREPOSITORY:-$GITHUB_REPOSITORY}" \
                           docker/moosedocs_git_hub_pages_test
@@ -60,7 +61,7 @@ jobs:
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "docs/build/"         
+          path: ./_site/
 
   # Deployment job
   deploy:
