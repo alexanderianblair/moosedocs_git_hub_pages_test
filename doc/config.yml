@@ -22,4 +22,4 @@ Extensions:
 
 Translator:
     type: MooseDocs.base.Translator
-    destination: ${ROOT_DIR}/../_site/build/html/
+    destination: ${ROOT_DIR}/_site/build/html/
