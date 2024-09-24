@@ -38,7 +38,7 @@ jobs:
       PRCOMMITSHA: ${{ github.event.pull_request.head.sha }}
       PRREPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
     steps:
-      - name: Build docs
+      - name: GetDockerMetadata
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
@@ -56,15 +56,14 @@ jobs:
                           --build-arg build_git_sha="${PRCOMMITSHA:-$GITHUB_SHA}" \
                           --build-arg build_git_repo="${PRREPOSITORY:-$GITHUB_REPOSITORY}" \
                           docker/moosedocs_git_hub_pages_test
-      - name: DockerRunContainer
+      - name: CopyStaticDocs
         run: |
-             docker run --name doctestcontainer -d ci-docs-ubuntu 
-             docker cp doctestcontainer:/opt/moosedocs_git_hub_pages_test/doc/build ${{ runner.temp }}/doctest        
-      - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
+             docker run --name doccontainer -d ci-docs-ubuntu 
+             docker cp doccontainer:/opt/moosedocs_git_hub_pages_test/doc/build ${{ runner.temp }}/site        
+      - name: UploadStaticDocs
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ runner.temp }}/doctest
+          path: ${{ runner.temp }}/site
 
   # Deployment job
   deploy:
@@ -74,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-docs
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy MooseDocs to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
