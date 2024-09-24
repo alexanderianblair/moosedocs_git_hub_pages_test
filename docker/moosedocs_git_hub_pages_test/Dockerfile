@@ -5,7 +5,8 @@ FROM alexanderianblair/platypus-deps:main
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --no-install-recommends \
     graphviz
 
-RUN pip install --no-cache-dir livereload
+RUN pip install --no-cache-dir livereload && \
+    pip install --no-cache-dir pybtex
 
 # By default four cores are used to compile
 ARG compile_cores=4
