@@ -1,3 +1,5 @@
+[![Documentation](https://github.com/alexanderianblair/moosedocs_git_hub_pages_test/actions/workflows/pages.yml/badge.svg?branch=main)](https://alexanderianblair.github.io/moosedocs_git_hub_pages_test/)
+
 MoosedocsGitHubPagesTest
 =====
 
