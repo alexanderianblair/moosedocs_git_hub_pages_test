@@ -51,7 +51,8 @@ jobs:
         run: echo "${PRCOMMITSHA:-$GITHUB_SHA}" "${PRREPOSITORY:-$GITHUB_REPOSITORY}"
       # Now build in a container with all deps
       - name: DockerBuildDocs
-        run: docker build -t ci-docs-ubuntu \
+        run: |
+             docker build -t ci-docs-ubuntu \
                           --build-arg build_git_sha="${PRCOMMITSHA:-$GITHUB_SHA}" \
                           --build-arg build_git_repo="${PRREPOSITORY:-$GITHUB_REPOSITORY}" \
                           docker/moosedocs_git_hub_pages_test
@@ -59,7 +60,7 @@ jobs:
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "docs/_site/"         
+          path: "docs/build/"         
 
   # Deployment job
   deploy:

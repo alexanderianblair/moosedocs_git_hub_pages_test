@@ -11,7 +11,7 @@ on:
 jobs:
   docker-build-test-ubuntu:
     runs-on: ubuntu-latest
-    name: BuildDocsUbuntu
+    name: BuildImage
     env:
       PRCOMMITSHA: ${{ github.event.pull_request.head.sha }}
       PRREPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
@@ -28,7 +28,7 @@ jobs:
       - name: PrintGithubContext
         run: echo "${PRCOMMITSHA:-$GITHUB_SHA}" "${PRREPOSITORY:-$GITHUB_REPOSITORY}"
       # Now build in a container with all deps
-      - name: DockerBuildTest
+      - name: DockerBuildImage
         run: |
              docker build -t ci-moosedocstest \
                           --build-arg build_git_sha="${PRCOMMITSHA:-$GITHUB_SHA}" \
