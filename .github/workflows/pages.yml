@@ -4,7 +4,7 @@
 # documentation.
 
 # Sample workflow for building and deploying MooseDocs site to GitHub Pages
-name: Deploy MooseDocs to Pages
+name: Documentation
 
 on:
   push:
